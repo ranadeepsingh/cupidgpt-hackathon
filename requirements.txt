@@ -1,0 +1,9 @@
+jupyter
+cohere
+langchain
+qdrant-client
+tfds-nightly
+python-dotenv
+pymongo
+pandas
+numpy
