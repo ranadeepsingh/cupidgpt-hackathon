@@ -7,6 +7,7 @@ Backend created during Modal + MongoDB AI Hackathon
 conda create --name cupidgpt python=3.10
 conda activate cupidgpt
 pip install -r requirements.txt
+modal token new
 ```
 
 # Data
