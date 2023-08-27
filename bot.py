@@ -32,18 +32,30 @@ def get_response(message, user_id):
         user_states[user_id] = {'step': 0, 'answers': []}
         return "Share some basic information like your age, sex, location, hobbies etc"
     if '/preference' in p_message:
-        user_states[user_id] = {'step': 0, 'answers': []}
+        user_states[user_id] = {'step': 1, 'answers': []}
         return "What type of relationship are you looking for?"    
     if '/match' in p_message:
         # user_data = collection.find_one({"User_ID": 35})
         
         rand_idx = random.randint(0, len(preference_male)-1)
-        return preference_male[rand_idx]
+        with open('Output.txt', 'r') as file:
+            data = file.read().replace('\n', '')
+        if "female" in data:
+            return preference_female[rand_idx]
+        else:
+            return preference_male[rand_idx]
 
     if user_id in user_states:
         user_state = user_states[user_id]
         step = user_state['step']
         if step == 0:
+            # handle answers for setup and preference here
+            user_state['answers'].append(message)
+            with open("Output.txt", "w") as text_file:
+                text_file.write(message)
+            del user_states[user_id]
+            return 'Thanks for sharing that'
+        if step == 1:
             # handle answers for setup and preference here
             user_state['answers'].append(message)
             del user_states[user_id]
